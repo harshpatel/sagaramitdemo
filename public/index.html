@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+  <title>Welcome!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,79 +15,80 @@
     }
 
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-tertiary: #1a1a25;
-      --accent: #00ffa3;
-      --accent-dim: #00ffa320;
-      --text-primary: #ffffff;
-      --text-secondary: #8888aa;
-      --error: #ff4757;
-      --success: #00ffa3;
-      --admin-color: #ff006e;
-      --member-color: #3b82f6;
+      --bg-primary: #fef7f0;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f8f4f0;
+      --accent: #ff6b35;
+      --accent-light: #fff0eb;
+      --accent-hover: #e55a2b;
+      --text-primary: #2d3436;
+      --text-secondary: #636e72;
+      --error: #e74c3c;
+      --success: #27ae60;
+      --admin-color: #9b59b6;
+      --admin-light: #f5eeff;
+      --member-color: #3498db;
+      --member-light: #ebf5fb;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
     }
 
     body {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Nunito', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      position: relative;
+      padding: 1rem;
     }
 
-    /* Animated background grid */
-    .grid-bg {
+    /* Decorative background */
+    .bg-shapes {
       position: fixed;
       inset: 0;
-      background-image: 
-        linear-gradient(var(--accent-dim) 1px, transparent 1px),
-        linear-gradient(90deg, var(--accent-dim) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridMove 20s linear infinite;
-      opacity: 0.5;
+      overflow: hidden;
       pointer-events: none;
+      z-index: 0;
     }
 
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(60px, 60px); }
-    }
-
-    /* Gradient orbs */
-    .orb {
-      position: fixed;
+    .shape {
+      position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
-      animation: float 8s ease-in-out infinite;
-      pointer-events: none;
+      opacity: 0.5;
     }
 
-    .orb-1 {
-      width: 400px;
-      height: 400px;
-      background: var(--accent);
-      top: -100px;
-      right: -100px;
-    }
-
-    .orb-2 {
+    .shape-1 {
       width: 300px;
       height: 300px;
-      background: #ff006e;
-      bottom: -50px;
-      left: -50px;
-      animation-delay: -4s;
+      background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+      top: -100px;
+      right: -50px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -30px) scale(1.1); }
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+      bottom: -50px;
+      left: -50px;
+    }
+
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
+      top: 50%;
+      left: 10%;
+    }
+
+    .shape-4 {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #fab1a0 0%, #e17055 100%);
+      bottom: 20%;
+      right: 10%;
     }
 
     .container {
@@ -95,138 +96,76 @@
       z-index: 10;
       padding: 2rem;
       width: 100%;
-      max-width: 500px;
+      max-width: 420px;
+      position: relative;
     }
 
-    .hello-text {
-      font-size: clamp(2.5rem, 10vw, 5rem);
+    .card {
+      background: var(--bg-secondary);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .emoji-header {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .title {
+      font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeInUp 1s ease-out;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
     }
 
-    .world-text {
-      font-size: clamp(2.5rem, 10vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1;
-      color: var(--accent);
-      text-shadow: 0 0 60px var(--accent-dim);
-      animation: fadeInUp 1s ease-out 0.2s backwards;
-    }
-
-    .tagline {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+    .subtitle {
+      font-size: 1rem;
       color: var(--text-secondary);
-      margin-top: 1.5rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      animation: fadeInUp 1s ease-out 0.4s backwards;
-    }
-
-    .pulse-ring {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border: 1px solid var(--accent-dim);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulse 4s ease-out infinite;
-      pointer-events: none;
-    }
-
-    .pulse-ring:nth-child(2) { animation-delay: 1s; }
-    .pulse-ring:nth-child(3) { animation-delay: 2s; }
-
-    @keyframes pulse {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
-    }
-
-    .status {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      z-index: 100;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: blink 2s ease-in-out infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+      margin-bottom: 2rem;
     }
 
     /* Form Styles */
     .form-group {
       margin-bottom: 1rem;
+      text-align: left;
     }
 
     .form-label {
       display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
       margin-bottom: 0.5rem;
-      text-align: left;
     }
 
     .form-input {
       width: 100%;
       padding: 0.875rem 1rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-dim);
-      border-radius: 10px;
-      font-family: 'Syne', sans-serif;
+      background: var(--bg-tertiary);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
       font-size: 1rem;
       color: var(--text-primary);
       outline: none;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     .form-input::placeholder {
       color: var(--text-secondary);
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     .form-input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-dim);
+      background: var(--bg-secondary);
     }
 
     .form-input.error {
@@ -235,39 +174,42 @@
     }
 
     .form-input.small {
-      padding: 0.625rem 0.875rem;
-      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
     }
 
-    .login-form {
-      margin-top: 2rem;
-      animation: fadeInUp 1s ease-out 0.5s backwards;
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
     }
 
-    .login-btn, .btn-primary {
+    .btn-primary {
       width: 100%;
       padding: 1rem 2rem;
-      margin-top: 1rem;
-      background: linear-gradient(135deg, var(--accent) 0%, #00cc82 100%);
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, #ff8c5a 100%);
       border: none;
-      border-radius: 10px;
-      font-family: 'Syne', sans-serif;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
       font-size: 1rem;
       font-weight: 700;
-      color: var(--bg-primary);
+      color: #fff;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
     }
 
-    .login-btn:hover, .btn-primary:hover {
+    .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 40px var(--accent-dim);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
     }
 
-    .login-btn:disabled, .btn-primary:disabled {
-      opacity: 0.5;
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
       cursor: not-allowed;
       transform: none;
     }
@@ -275,35 +217,36 @@
     .error-message, .message {
       margin-top: 1rem;
       padding: 0.75rem 1rem;
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
       display: none;
     }
 
     .error-message, .message.error {
-      background: rgba(255, 71, 87, 0.1);
-      border: 1px solid var(--error);
+      background: #fdeaea;
       color: var(--error);
     }
 
     .message.success {
-      background: rgba(0, 255, 163, 0.1);
-      border: 1px solid var(--success);
+      background: #e8f8ef;
       color: var(--success);
     }
 
     .error-message.visible, .message.visible {
       display: block;
-      animation: fadeInUp 0.3s ease-out;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .users-hint {
       margin-top: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      opacity: 0.6;
     }
 
     /* Screens */
@@ -315,75 +258,63 @@
     .role-badge {
       display: inline-block;
       padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      font-size: 0.65rem;
-      font-weight: 600;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       margin-left: 0.5rem;
       vertical-align: middle;
     }
 
     .role-admin {
-      background: linear-gradient(135deg, var(--admin-color) 0%, #ff4d94 100%);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+      background: var(--admin-light);
+      color: var(--admin-color);
     }
 
     .role-member {
-      background: linear-gradient(135deg, var(--member-color) 0%, #60a5fa 100%);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      background: var(--member-light);
+      color: var(--member-color);
     }
 
     /* User card */
     .user-card {
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      padding: 1.5rem;
       margin-top: 1.5rem;
-      padding: 1.25rem 1.5rem;
-      background: var(--bg-secondary);
-      border-radius: 14px;
-      border: 1px solid var(--accent-dim);
-      animation: fadeInUp 0.5s ease-out;
     }
 
     .user-card.admin {
-      border-color: rgba(255, 0, 110, 0.3);
-      box-shadow: 0 0 40px rgba(255, 0, 110, 0.15);
+      background: var(--admin-light);
     }
 
     .user-card.member {
-      border-color: rgba(59, 130, 246, 0.3);
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+      background: var(--member-light);
     }
 
     .welcome-name {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .user-permissions {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       margin-bottom: 1rem;
     }
 
-    .user-permissions.admin { color: var(--admin-color); }
-    .user-permissions.member { color: var(--member-color); }
-
     .logout-btn {
-      padding: 0.625rem 1.25rem;
-      background: transparent;
-      border: 1px solid var(--text-secondary);
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--bg-secondary);
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
     }
 
     .logout-btn:hover {
@@ -392,25 +323,24 @@
     }
 
     .avatar {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      margin: 0 auto 0.75rem;
+      margin: 0 auto 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: 800;
-      color: var(--bg-primary);
+      color: #fff;
     }
 
-    .avatar.admin { background: linear-gradient(135deg, var(--admin-color) 0%, #ff4d94 100%); }
-    .avatar.member { background: linear-gradient(135deg, var(--member-color) 0%, #60a5fa 100%); }
+    .avatar.admin { background: linear-gradient(135deg, var(--admin-color) 0%, #8e44ad 100%); }
+    .avatar.member { background: linear-gradient(135deg, var(--member-color) 0%, #2980b9 100%); }
 
     /* Admin Panel */
     .admin-panel {
       margin-top: 1.5rem;
-      animation: fadeInUp 0.5s ease-out 0.2s backwards;
     }
 
     .admin-panel-header {
@@ -419,17 +349,15 @@
       justify-content: center;
       gap: 0.5rem;
       margin-bottom: 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--admin-color);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
     }
 
     .admin-panel-content {
       background: var(--bg-secondary);
-      border: 1px solid rgba(255, 0, 110, 0.2);
-      border-radius: 14px;
+      border: 2px solid #f0e6ff;
+      border-radius: 16px;
       padding: 1.25rem;
     }
 
@@ -442,17 +370,16 @@
 
     .tab-btn {
       flex: 1;
-      padding: 0.625rem 1rem;
+      padding: 0.6rem 1rem;
       background: var(--bg-tertiary);
-      border: 1px solid transparent;
-      border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
     }
 
     .tab-btn:hover {
@@ -460,8 +387,8 @@
     }
 
     .tab-btn.active {
-      background: var(--admin-color);
-      color: #fff;
+      background: var(--admin-light);
+      color: var(--admin-color);
       border-color: var(--admin-color);
     }
 
@@ -483,12 +410,12 @@
       justify-content: space-between;
       padding: 0.75rem 1rem;
       background: var(--bg-tertiary);
-      border-radius: 8px;
+      border-radius: 12px;
       transition: all 0.2s ease;
     }
 
     .user-list-item:hover {
-      background: var(--bg-primary);
+      background: #f0f0f0;
     }
 
     .user-list-info {
@@ -498,15 +425,15 @@
     }
 
     .user-list-avatar {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      color: var(--bg-primary);
+      color: #fff;
     }
 
     .user-list-details {
@@ -514,27 +441,26 @@
     }
 
     .user-list-name {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
     }
 
     .user-list-username {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
     }
 
     .delete-btn {
       padding: 0.4rem 0.75rem;
-      background: transparent;
-      border: 1px solid var(--error);
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
+      background: #fdeaea;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--error);
       cursor: pointer;
       transition: all 0.2s ease;
-      text-transform: uppercase;
     }
 
     .delete-btn:hover {
@@ -566,12 +492,12 @@
 
     .role-select {
       width: 100%;
-      padding: 0.625rem 0.875rem;
+      padding: 0.75rem 1rem;
       background: var(--bg-tertiary);
-      border: 1px solid var(--accent-dim);
-      border-radius: 8px;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.9rem;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
       color: var(--text-primary);
       cursor: pointer;
       outline: none;
@@ -581,32 +507,26 @@
       border-color: var(--accent);
     }
 
-    .role-select option {
-      background: var(--bg-secondary);
-    }
-
     .btn-add {
       padding: 0.75rem 1.5rem;
-      background: linear-gradient(135deg, var(--admin-color) 0%, #ff4d94 100%);
+      background: linear-gradient(135deg, var(--admin-color) 0%, #8e44ad 100%);
       border: none;
-      border-radius: 8px;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
       font-weight: 700;
       color: #fff;
       cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
     }
 
     .btn-add:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+      box-shadow: 0 8px 25px rgba(155, 89, 182, 0.35);
     }
 
     .btn-add:disabled {
-      opacity: 0.5;
+      opacity: 0.6;
       cursor: not-allowed;
       transform: none;
     }
@@ -615,104 +535,105 @@
       padding: 2rem;
       text-align: center;
       color: var(--text-secondary);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div class="grid-bg"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  
-  <div class="pulse-ring"></div>
-  <div class="pulse-ring"></div>
-  <div class="pulse-ring"></div>
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
   
   <!-- Login Screen -->
   <div class="container login-screen" id="login-screen">
-    <h1 class="hello-text">Hello</h1>
-    <h1 class="world-text">World</h1>
-    <p class="tagline">Sign in to continue</p>
+    <div class="card">
+      <div class="emoji-header">👋</div>
+      <h1 class="title">Welcome!</h1>
+      <p class="subtitle">Sign in to continue</p>
 
-    <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
-      <div class="form-group">
-        <label class="form-label" for="username">Username</label>
-        <input type="text" class="form-input" id="username" placeholder="Enter your username" autocomplete="username" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="password">Password</label>
-        <input type="password" class="form-input" id="password" placeholder="Enter your password" autocomplete="current-password" required>
-      </div>
-      <button type="submit" class="login-btn" id="login-btn">Sign In</button>
-      <div class="error-message" id="error-message"></div>
-      <p class="users-hint">Users: harsh, amit, sagar • Default password: 12345678</p>
-    </form>
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input type="text" class="form-input" id="username" placeholder="Enter your name" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" class="form-input" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn-primary" id="login-btn">Sign In</button>
+        <div class="error-message" id="error-message"></div>
+        <p class="users-hint">👨‍👩‍👧‍👦 Users: harsh, amit, sagar<br>🔑 Password: 12345678</p>
+      </form>
+    </div>
   </div>
 
   <!-- Welcome Screen -->
   <div class="container welcome-screen" id="welcome-screen">
-    <h1 class="hello-text">Welcome</h1>
-    <h1 class="world-text" id="welcome-name-large">User</h1>
-    
-    <div class="user-card" id="user-card">
-      <div class="avatar" id="user-avatar"></div>
-      <div class="welcome-name" id="welcome-display">
-        <span id="display-name"></span>
-        <span class="role-badge" id="role-badge"></span>
-      </div>
-      <p class="user-permissions" id="user-permissions"></p>
-      <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
-    </div>
-
-    <!-- Admin Panel (only shown for admins) -->
-    <div class="admin-panel" id="admin-panel" style="display: none;">
-      <div class="admin-panel-header">
-        <span>⚙️</span>
-        <span>Admin Panel</span>
-      </div>
-      <div class="admin-panel-content">
-        <div class="tabs">
-          <button class="tab-btn active" onclick="switchTab('users-tab')">All Users</button>
-          <button class="tab-btn" onclick="switchTab('add-tab')">Add User</button>
+    <div class="card">
+      <div class="emoji-header">🎉</div>
+      <h1 class="title">Hi, <span id="welcome-name-large">Friend</span>!</h1>
+      <p class="subtitle">Great to see you</p>
+      
+      <div class="user-card" id="user-card">
+        <div class="avatar" id="user-avatar"></div>
+        <div class="welcome-name" id="welcome-display">
+          <span id="display-name"></span>
+          <span class="role-badge" id="role-badge"></span>
         </div>
+        <p class="user-permissions" id="user-permissions"></p>
+        <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+      </div>
 
-        <!-- Users List Tab -->
-        <div class="tab-content active" id="users-tab">
-          <div class="user-list" id="user-list">
-            <!-- Users loaded dynamically -->
+      <!-- Admin Panel (only shown for admins) -->
+      <div class="admin-panel" id="admin-panel" style="display: none;">
+        <div class="admin-panel-header">
+          <span>⚙️</span>
+          <span>Manage Family Members</span>
+        </div>
+        <div class="admin-panel-content">
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('users-tab')">Everyone</button>
+            <button class="tab-btn" onclick="switchTab('add-tab')">Add Someone</button>
           </div>
-        </div>
 
-        <!-- Add User Tab -->
-        <div class="tab-content" id="add-tab">
-          <form class="add-user-form" onsubmit="handleAddUser(event)">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-input small" id="new-name" placeholder="Full name" required>
+          <!-- Users List Tab -->
+          <div class="tab-content active" id="users-tab">
+            <div class="user-list" id="user-list"></div>
+          </div>
+
+          <!-- Add User Tab -->
+          <div class="tab-content" id="add-tab">
+            <form class="add-user-form" onsubmit="handleAddUser(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-input small" id="new-name" placeholder="Full name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input type="text" class="form-input small" id="new-username" placeholder="Username" required>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-input small" id="new-username" placeholder="Username" required>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-input small" id="new-password" placeholder="Password" value="12345678" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Role</label>
+                  <select class="role-select" id="new-role">
+                    <option value="member">Member</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-input small" id="new-password" placeholder="Password" value="12345678" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Role</label>
-                <select class="role-select" id="new-role">
-                  <option value="member">Member</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="btn-add" id="add-user-btn">Add User</button>
-            <div class="message" id="add-message"></div>
-          </form>
+              <button type="submit" class="btn-add" id="add-user-btn">Add Person</button>
+              <div class="message" id="add-message"></div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -787,20 +708,18 @@
       
       welcomeNameLarge.textContent = user.name;
       displayName.textContent = user.name;
-      roleBadge.textContent = user.role;
+      roleBadge.textContent = user.role === 'admin' ? 'Admin' : 'Member';
       roleBadge.className = 'role-badge role-' + user.role;
       userAvatar.textContent = user.name.charAt(0).toUpperCase();
       userAvatar.className = 'avatar ' + user.role;
       
       if (user.role === 'admin') {
-        userPermissions.textContent = '🔐 Full access • Manage users • System settings';
-        userPermissions.className = 'user-permissions admin';
+        userPermissions.textContent = '👑 You can manage everyone';
         userCard.className = 'user-card admin';
         adminPanel.style.display = 'block';
         loadUsers();
       } else {
-        userPermissions.textContent = '👤 Standard access • View content • Limited actions';
-        userPermissions.className = 'user-permissions member';
+        userPermissions.textContent = '😊 Welcome to the family!';
         userCard.className = 'user-card member';
         adminPanel.style.display = 'none';
       }
@@ -822,7 +741,6 @@
       document.getElementById('login-screen').classList.remove('hidden');
     }
     
-    // Tab switching
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -835,7 +753,6 @@
       }
     }
     
-    // Load users list
     async function loadUsers() {
       const userList = document.getElementById('user-list');
       
@@ -844,33 +761,32 @@
         const users = await response.json();
         
         if (users.length === 0) {
-          userList.innerHTML = '<div class="empty-state">No users found</div>';
+          userList.innerHTML = '<div class="empty-state">No one here yet!</div>';
           return;
         }
         
         userList.innerHTML = users.map(user => `
           <div class="user-list-item">
             <div class="user-list-info">
-              <div class="user-list-avatar ${user.role === 'admin' ? 'avatar admin' : 'avatar member'}">
+              <div class="user-list-avatar avatar ${user.role}">
                 ${user.name.charAt(0).toUpperCase()}
               </div>
               <div class="user-list-details">
-                <div class="user-list-name">${user.name} <span class="role-badge role-${user.role}">${user.role}</span></div>
+                <div class="user-list-name">${user.name} <span class="role-badge role-${user.role}">${user.role === 'admin' ? 'Admin' : 'Member'}</span></div>
                 <div class="user-list-username">@${user.username}</div>
               </div>
             </div>
             <button class="delete-btn" onclick="handleDeleteUser('${user.username}')" 
-              ${user.username === currentUser?.username ? 'disabled title="Cannot delete yourself"' : ''}>
-              Delete
+              ${user.username === currentUser?.username ? 'disabled title="That\'s you!"' : ''}>
+              Remove
             </button>
           </div>
         `).join('');
       } catch (error) {
-        userList.innerHTML = '<div class="empty-state">Error loading users</div>';
+        userList.innerHTML = '<div class="empty-state">Oops! Could not load users.</div>';
       }
     }
     
-    // Add user
     async function handleAddUser(event) {
       event.preventDefault();
       
@@ -898,33 +814,30 @@
         const data = await response.json();
         
         if (data.success) {
-          message.textContent = data.message;
+          message.textContent = '✅ ' + data.message;
           message.classList.add('visible', 'success');
           
-          // Reset form
           document.getElementById('new-name').value = '';
           document.getElementById('new-username').value = '';
           document.getElementById('new-password').value = '12345678';
           document.getElementById('new-role').value = 'member';
           
-          // Refresh user list
           loadUsers();
         } else {
-          message.textContent = data.message;
+          message.textContent = '❌ ' + data.message;
           message.classList.add('visible', 'error');
         }
       } catch (error) {
-        message.textContent = 'Error adding user. Please try again.';
+        message.textContent = '❌ Something went wrong. Try again!';
         message.classList.add('visible', 'error');
       } finally {
         addBtn.disabled = false;
-        addBtn.textContent = 'Add User';
+        addBtn.textContent = 'Add Person';
       }
     }
     
-    // Delete user
     async function handleDeleteUser(username) {
-      if (!confirm(`Are you sure you want to delete user "${username}"?`)) {
+      if (!confirm(`Remove "${username}" from the family?`)) {
         return;
       }
       
@@ -944,11 +857,10 @@
           alert(data.message);
         }
       } catch (error) {
-        alert('Error deleting user. Please try again.');
+        alert('Something went wrong. Try again!');
       }
     }
     
-    // Check for existing session on page load
     window.addEventListener('DOMContentLoaded', () => {
       const savedUser = sessionStorage.getItem('currentUser');
       if (savedUser) {
@@ -961,10 +873,5 @@
       }
     });
   </script>
-
-  <div class="status">
-    <span class="status-dot"></span>
-    <span>Server active on port 3001</span>
-  </div>
 </body>
 </html>
