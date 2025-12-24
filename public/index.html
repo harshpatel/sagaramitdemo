@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome!</title>
+  <title>Family Tasks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,6 @@
       --bg-tertiary: #f8f4f0;
       --accent: #ff6b35;
       --accent-light: #fff0eb;
-      --accent-hover: #e55a2b;
       --text-primary: #2d3436;
       --text-secondary: #636e72;
       --error: #e74c3c;
@@ -29,8 +28,10 @@
       --admin-light: #f5eeff;
       --member-color: #3498db;
       --member-light: #ebf5fb;
+      --priority-high: #e74c3c;
+      --priority-medium: #f39c12;
+      --priority-low: #27ae60;
       --shadow: 0 4px 20px rgba(0,0,0,0.08);
-      --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
     }
 
     body {
@@ -38,13 +39,9 @@
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 1rem;
     }
 
-    /* Decorative background */
     .bg-shapes {
       position: fixed;
       inset: 0;
@@ -56,96 +53,62 @@
     .shape {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
-    .shape-1 {
-      width: 300px;
-      height: 300px;
-      background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-      top: -100px;
-      right: -50px;
-    }
+    .shape-1 { width: 300px; height: 300px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e); top: -100px; right: -50px; }
+    .shape-2 { width: 200px; height: 200px; background: linear-gradient(135deg, #a29bfe, #6c5ce7); bottom: -50px; left: -50px; }
+    .shape-3 { width: 150px; height: 150px; background: linear-gradient(135deg, #81ecec, #00cec9); top: 40%; left: 5%; }
+    .shape-4 { width: 100px; height: 100px; background: linear-gradient(135deg, #fab1a0, #e17055); bottom: 30%; right: 5%; }
 
-    .shape-2 {
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
-      bottom: -50px;
-      left: -50px;
-    }
-
-    .shape-3 {
-      width: 150px;
-      height: 150px;
-      background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
-      top: 50%;
-      left: 10%;
-    }
-
-    .shape-4 {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #fab1a0 0%, #e17055 100%);
-      bottom: 20%;
-      right: 10%;
-    }
-
-    .container {
-      text-align: center;
-      z-index: 10;
-      padding: 2rem;
-      width: 100%;
-      max-width: 420px;
+    .app-container {
+      max-width: 600px;
+      margin: 0 auto;
       position: relative;
+      z-index: 10;
     }
 
     .card {
       background: var(--bg-secondary);
-      border-radius: 24px;
-      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      padding: 2rem;
       box-shadow: var(--shadow);
+      margin-bottom: 1rem;
     }
 
+    .card-small { padding: 1.5rem; }
+
     .emoji-header {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 0.75rem;
       animation: bounce 2s ease-in-out infinite;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     .title {
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 800;
-      color: var(--text-primary);
+      text-align: center;
       margin-bottom: 0.25rem;
     }
 
     .subtitle {
       font-size: 1rem;
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
 
     /* Form Styles */
-    .form-group {
-      margin-bottom: 1rem;
-      text-align: left;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-    }
-
-    .form-input {
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    
+    .form-input, .form-select {
       width: 100%;
       padding: 0.875rem 1rem;
       background: var(--bg-tertiary);
@@ -158,37 +121,14 @@
       transition: all 0.2s ease;
     }
 
-    .form-input::placeholder {
-      color: var(--text-secondary);
-      opacity: 0.6;
-    }
-
-    .form-input:focus {
-      border-color: var(--accent);
-      background: var(--bg-secondary);
-    }
-
-    .form-input.error {
-      border-color: var(--error);
-      animation: shake 0.4s ease;
-    }
-
-    .form-input.small {
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-5px); }
-      40%, 80% { transform: translateX(5px); }
-    }
+    .form-input:focus, .form-select:focus { border-color: var(--accent); background: var(--bg-secondary); }
+    .form-input.error { border-color: var(--error); }
+    .form-input.small, .form-select.small { padding: 0.7rem 0.875rem; font-size: 0.95rem; }
 
     .btn-primary {
       width: 100%;
-      padding: 1rem 2rem;
-      margin-top: 0.5rem;
-      background: linear-gradient(135deg, var(--accent) 0%, #ff8c5a 100%);
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--accent), #ff8c5a);
       border: none;
       border-radius: 12px;
       font-family: 'Nunito', sans-serif;
@@ -199,20 +139,8 @@
       transition: all 0.2s ease;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     .error-message, .message {
       margin-top: 1rem;
@@ -223,320 +151,300 @@
       display: none;
     }
 
-    .error-message, .message.error {
-      background: #fdeaea;
-      color: var(--error);
-    }
+    .error-message, .message.error { background: #fdeaea; color: var(--error); }
+    .message.success { background: #e8f8ef; color: var(--success); }
+    .error-message.visible, .message.visible { display: block; }
 
-    .message.success {
-      background: #e8f8ef;
-      color: var(--success);
-    }
+    .users-hint { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary); text-align: center; }
 
-    .error-message.visible, .message.visible {
-      display: block;
-      animation: fadeIn 0.3s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .users-hint {
-      margin-top: 1.5rem;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    /* Screens */
+    /* Screen visibility */
     .welcome-screen { display: none; }
     .welcome-screen.visible { display: block; }
     .login-screen.hidden { display: none; }
 
-    /* Role badge */
-    .role-badge {
-      display: inline-block;
-      padding: 0.25rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-left: 0.5rem;
-      vertical-align: middle;
-    }
-
-    .role-admin {
-      background: var(--admin-light);
-      color: var(--admin-color);
-    }
-
-    .role-member {
-      background: var(--member-light);
-      color: var(--member-color);
-    }
-
-    /* User card */
-    .user-card {
-      background: var(--bg-tertiary);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .user-card.admin {
-      background: var(--admin-light);
-    }
-
-    .user-card.member {
-      background: var(--member-light);
-    }
-
-    .welcome-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    .user-permissions {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
+    /* Header bar */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 1rem;
     }
 
-    .logout-btn {
-      padding: 0.6rem 1.25rem;
-      background: var(--bg-secondary);
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .user-info-mini {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .logout-btn:hover {
-      border-color: var(--error);
-      color: var(--error);
-    }
-
-    .avatar {
-      width: 70px;
-      height: 70px;
+    .avatar-mini {
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
-      margin: 0 auto 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.75rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: #fff;
     }
 
-    .avatar.admin { background: linear-gradient(135deg, var(--admin-color) 0%, #8e44ad 100%); }
-    .avatar.member { background: linear-gradient(135deg, var(--member-color) 0%, #2980b9 100%); }
+    .avatar-mini.admin { background: linear-gradient(135deg, var(--admin-color), #8e44ad); }
+    .avatar-mini.member { background: linear-gradient(135deg, var(--member-color), #2980b9); }
 
-    /* Admin Panel */
-    .admin-panel {
-      margin-top: 1.5rem;
-    }
+    .user-details-mini h3 { font-size: 1rem; font-weight: 700; }
+    .user-details-mini p { font-size: 0.75rem; color: var(--text-secondary); }
 
-    .admin-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--admin-color);
-    }
-
-    .admin-panel-content {
-      background: var(--bg-secondary);
-      border: 2px solid #f0e6ff;
-      border-radius: 16px;
-      padding: 1.25rem;
-    }
-
-    /* Tabs */
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 0.6rem 1rem;
+    .logout-btn {
+      padding: 0.5rem 1rem;
       background: var(--bg-tertiary);
-      border: 2px solid transparent;
+      border: none;
       border-radius: 10px;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .tab-btn:hover {
-      color: var(--text-primary);
+    .logout-btn:hover { background: #fdeaea; color: var(--error); }
+
+    /* Role badge */
+    .role-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
-    .tab-btn.active {
-      background: var(--admin-light);
-      color: var(--admin-color);
-      border-color: var(--admin-color);
+    .role-admin { background: var(--admin-light); color: var(--admin-color); }
+    .role-member { background: var(--member-light); color: var(--member-color); }
+
+    /* Section headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
     }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Task list */
+    .task-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--bg-tertiary);
+      border-radius: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .task-item:hover { background: #f0ebe5; }
+    .task-item.completed { opacity: 0.6; }
+    .task-item.completed .task-title { text-decoration: line-through; }
+
+    .task-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .task-checkbox:hover { border-color: var(--success); }
+    .task-checkbox.checked { background: var(--success); border-color: var(--success); color: #fff; }
+
+    .task-content { flex: 1; }
+    .task-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .task-description { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .task-priority {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .priority-high { background: #fdeaea; color: var(--priority-high); }
+    .priority-medium { background: #fef5e7; color: var(--priority-medium); }
+    .priority-low { background: #e8f8ef; color: var(--priority-low); }
+
+    .task-assignee {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .task-delete {
+      padding: 0.4rem 0.6rem;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .task-delete:hover { background: #fdeaea; color: var(--error); }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+    }
+
+    .empty-state-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.6rem;
+      background: var(--bg-tertiary);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* User list */
-    .user-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-height: 200px;
-      overflow-y: auto;
+    /* Admin section */
+    .admin-section {
+      background: var(--admin-light);
+      border: 2px solid #e8d4f0;
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-top: 1rem;
     }
+
+    .admin-header {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--admin-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Add task form */
+    .add-task-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .form-row { display: flex; gap: 0.75rem; }
+    .form-row .form-group { flex: 1; margin-bottom: 0; }
+
+    .btn-add {
+      padding: 0.75rem;
+      background: linear-gradient(135deg, var(--admin-color), #8e44ad);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-add:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(155, 89, 182, 0.35); }
+    .btn-add:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* User management */
+    .user-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 180px; overflow-y: auto; }
 
     .user-list-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1rem;
-      background: var(--bg-tertiary);
-      border-radius: 12px;
-      transition: all 0.2s ease;
+      padding: 0.6rem 0.875rem;
+      background: var(--bg-secondary);
+      border-radius: 10px;
     }
 
-    .user-list-item:hover {
-      background: #f0f0f0;
-    }
-
-    .user-list-info {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+    .user-list-info { display: flex; align-items: center; gap: 0.6rem; }
 
     .user-list-avatar {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .user-list-details {
-      text-align: left;
-    }
-
-    .user-list-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .user-list-username {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
+    .user-list-name { font-size: 0.9rem; font-weight: 700; }
+    .user-list-username { font-size: 0.7rem; color: var(--text-secondary); }
 
     .delete-btn {
-      padding: 0.4rem 0.75rem;
+      padding: 0.35rem 0.6rem;
       background: #fdeaea;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--error);
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
-    .delete-btn:hover {
-      background: var(--error);
-      color: #fff;
-    }
+    .delete-btn:hover { background: var(--error); color: #fff; }
+    .delete-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-    .delete-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    /* Add user form */
-    .add-user-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .form-row {
+    /* Stats */
+    .stats-row {
       display: flex;
       gap: 0.75rem;
+      margin-bottom: 1rem;
     }
 
-    .form-row .form-group {
+    .stat-card {
       flex: 1;
-      margin-bottom: 0;
-    }
-
-    .role-select {
-      width: 100%;
-      padding: 0.75rem 1rem;
       background: var(--bg-tertiary);
-      border: 2px solid transparent;
-      border-radius: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      cursor: pointer;
-      outline: none;
-    }
-
-    .role-select:focus {
-      border-color: var(--accent);
-    }
-
-    .btn-add {
-      padding: 0.75rem 1.5rem;
-      background: linear-gradient(135deg, var(--admin-color) 0%, #8e44ad 100%);
-      border: none;
-      border-radius: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-add:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(155, 89, 182, 0.35);
-    }
-
-    .btn-add:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .empty-state {
-      padding: 2rem;
+      border-radius: 12px;
+      padding: 1rem;
       text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
     }
+
+    .stat-number { font-size: 1.75rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--text-secondary); }
   </style>
 </head>
 <body>
@@ -546,71 +454,126 @@
     <div class="shape shape-3"></div>
     <div class="shape shape-4"></div>
   </div>
-  
-  <!-- Login Screen -->
-  <div class="container login-screen" id="login-screen">
-    <div class="card">
-      <div class="emoji-header">👋</div>
-      <h1 class="title">Welcome!</h1>
-      <p class="subtitle">Sign in to continue</p>
 
-      <form id="login-form" onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label class="form-label" for="username">Username</label>
-          <input type="text" class="form-input" id="username" placeholder="Enter your name" autocomplete="username" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="password">Password</label>
-          <input type="password" class="form-input" id="password" placeholder="Enter your password" autocomplete="current-password" required>
-        </div>
-        <button type="submit" class="btn-primary" id="login-btn">Sign In</button>
-        <div class="error-message" id="error-message"></div>
-        <p class="users-hint">👨‍👩‍👧‍👦 Users: harsh, amit, sagar<br>🔑 Password: 12345678</p>
-      </form>
+  <div class="app-container">
+    <!-- Login Screen -->
+    <div class="login-screen" id="login-screen">
+      <div class="card">
+        <div class="emoji-header">👋</div>
+        <h1 class="title">Family Tasks</h1>
+        <p class="subtitle">Sign in to see your tasks</p>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-input" id="username" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-input" id="password" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="btn-primary" id="login-btn">Sign In</button>
+          <div class="error-message" id="error-message"></div>
+          <p class="users-hint">👨‍👩‍👧‍👦 Users: harsh, amit, sagar<br>🔑 Password: 12345678</p>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Welcome Screen -->
-  <div class="container welcome-screen" id="welcome-screen">
-    <div class="card">
-      <div class="emoji-header">🎉</div>
-      <h1 class="title">Hi, <span id="welcome-name-large">Friend</span>!</h1>
-      <p class="subtitle">Great to see you</p>
-      
-      <div class="user-card" id="user-card">
-        <div class="avatar" id="user-avatar"></div>
-        <div class="welcome-name" id="welcome-display">
-          <span id="display-name"></span>
-          <span class="role-badge" id="role-badge"></span>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcome-screen">
+      <!-- Header -->
+      <div class="card card-small">
+        <div class="header-bar">
+          <div class="user-info-mini">
+            <div class="avatar-mini" id="user-avatar"></div>
+            <div class="user-details-mini">
+              <h3 id="user-name-display"></h3>
+              <p><span class="role-badge" id="role-badge"></span></p>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
         </div>
-        <p class="user-permissions" id="user-permissions"></p>
-        <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
       </div>
 
-      <!-- Admin Panel (only shown for admins) -->
-      <div class="admin-panel" id="admin-panel" style="display: none;">
-        <div class="admin-panel-header">
-          <span>⚙️</span>
-          <span>Manage Family Members</span>
+      <!-- Stats -->
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-number" id="stat-pending">0</div>
+          <div class="stat-label">To Do</div>
         </div>
-        <div class="admin-panel-content">
-          <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('users-tab')">Everyone</button>
-            <button class="tab-btn" onclick="switchTab('add-tab')">Add Someone</button>
-          </div>
+        <div class="stat-card">
+          <div class="stat-number" id="stat-completed">0</div>
+          <div class="stat-label">Done</div>
+        </div>
+      </div>
 
-          <!-- Users List Tab -->
-          <div class="tab-content active" id="users-tab">
-            <div class="user-list" id="user-list"></div>
-          </div>
+      <!-- Tasks -->
+      <div class="card">
+        <div class="section-header">
+          <h2 class="section-title">📋 <span id="tasks-title">My Tasks</span></h2>
+        </div>
 
-          <!-- Add User Tab -->
-          <div class="tab-content" id="add-tab">
-            <form class="add-user-form" onsubmit="handleAddUser(event)">
+        <div class="tabs" id="task-tabs">
+          <button class="tab-btn active" onclick="filterTasks('all')">All</button>
+          <button class="tab-btn" onclick="filterTasks('pending')">To Do</button>
+          <button class="tab-btn" onclick="filterTasks('completed')">Done</button>
+        </div>
+
+        <div class="task-list" id="task-list"></div>
+      </div>
+
+      <!-- Admin Panel -->
+      <div class="card" id="admin-panel" style="display: none;">
+        <div class="section-header">
+          <h2 class="section-title">⚙️ Admin Panel</h2>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchAdminTab('assign-tab')">Assign Task</button>
+          <button class="tab-btn" onclick="switchAdminTab('members-tab')">Members</button>
+        </div>
+
+        <!-- Assign Task -->
+        <div class="tab-content active" id="assign-tab">
+          <form class="add-task-form" onsubmit="handleAddTask(event)">
+            <div class="form-group">
+              <label class="form-label">Task Title</label>
+              <input type="text" class="form-input small" id="task-title" placeholder="What needs to be done?" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description (optional)</label>
+              <input type="text" class="form-input small" id="task-description" placeholder="Add details...">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Assign To</label>
+                <select class="form-select small" id="task-assignee" required></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Priority</label>
+                <select class="form-select small" id="task-priority">
+                  <option value="low">🟢 Low</option>
+                  <option value="medium" selected>🟡 Medium</option>
+                  <option value="high">🔴 High</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn-add" id="add-task-btn">✨ Assign Task</button>
+            <div class="message" id="task-message"></div>
+          </form>
+        </div>
+
+        <!-- Members -->
+        <div class="tab-content" id="members-tab">
+          <div class="user-list" id="user-list"></div>
+          
+          <div class="admin-section" style="margin-top: 1rem;">
+            <div class="admin-header">➕ Add Family Member</div>
+            <form class="add-task-form" onsubmit="handleAddUser(event)">
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">Name</label>
-                  <input type="text" class="form-input small" id="new-name" placeholder="Full name" required>
+                  <input type="text" class="form-input small" id="new-name" placeholder="Name" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Username</label>
@@ -620,18 +583,18 @@
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">Password</label>
-                  <input type="password" class="form-input small" id="new-password" placeholder="Password" value="12345678" required>
+                  <input type="password" class="form-input small" id="new-password" value="12345678" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Role</label>
-                  <select class="role-select" id="new-role">
+                  <select class="form-select small" id="new-role">
                     <option value="member">Member</option>
                     <option value="admin">Admin</option>
                   </select>
                 </div>
               </div>
-              <button type="submit" class="btn-add" id="add-user-btn">Add Person</button>
-              <div class="message" id="add-message"></div>
+              <button type="submit" class="btn-add">Add Member</button>
+              <div class="message" id="add-user-message"></div>
             </form>
           </div>
         </div>
@@ -641,232 +604,325 @@
 
   <script>
     let currentUser = null;
+    let allTasks = [];
+    let currentFilter = 'all';
 
+    // Login
     async function handleLogin(event) {
       event.preventDefault();
-      
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
       const loginBtn = document.getElementById('login-btn');
       const errorMessage = document.getElementById('error-message');
-      const usernameInput = document.getElementById('username');
-      const passwordInput = document.getElementById('password');
-      
+
       errorMessage.classList.remove('visible');
-      usernameInput.classList.remove('error');
-      passwordInput.classList.remove('error');
-      
       loginBtn.disabled = true;
       loginBtn.textContent = 'Signing in...';
-      
+
       try {
-        const response = await fetch('/api/login', {
+        const res = await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
         });
-        
-        const data = await response.json();
-        
+        const data = await res.json();
+
         if (data.success) {
           currentUser = data.user;
-          showWelcomeScreen(data.user);
+          sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+          showWelcomeScreen();
         } else {
-          showError(data.message);
-          if (data.message.includes('not found')) {
-            usernameInput.classList.add('error');
-          } else if (data.message.includes('password')) {
-            passwordInput.classList.add('error');
-          }
+          errorMessage.textContent = data.message;
+          errorMessage.classList.add('visible');
         }
-      } catch (error) {
-        showError('Connection error. Please try again.');
+      } catch (err) {
+        errorMessage.textContent = 'Connection error';
+        errorMessage.classList.add('visible');
       } finally {
         loginBtn.disabled = false;
         loginBtn.textContent = 'Sign In';
       }
     }
-    
-    function showError(message) {
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = message;
-      errorMessage.classList.add('visible');
-    }
-    
-    function showWelcomeScreen(user) {
-      currentUser = user;
-      
-      const loginScreen = document.getElementById('login-screen');
-      const welcomeScreen = document.getElementById('welcome-screen');
-      const welcomeNameLarge = document.getElementById('welcome-name-large');
-      const displayName = document.getElementById('display-name');
-      const roleBadge = document.getElementById('role-badge');
-      const userPermissions = document.getElementById('user-permissions');
-      const userCard = document.getElementById('user-card');
-      const userAvatar = document.getElementById('user-avatar');
-      const adminPanel = document.getElementById('admin-panel');
-      
-      welcomeNameLarge.textContent = user.name;
-      displayName.textContent = user.name;
-      roleBadge.textContent = user.role === 'admin' ? 'Admin' : 'Member';
-      roleBadge.className = 'role-badge role-' + user.role;
-      userAvatar.textContent = user.name.charAt(0).toUpperCase();
-      userAvatar.className = 'avatar ' + user.role;
-      
-      if (user.role === 'admin') {
-        userPermissions.textContent = '👑 You can manage everyone';
-        userCard.className = 'user-card admin';
-        adminPanel.style.display = 'block';
-        loadUsers();
-      } else {
-        userPermissions.textContent = '😊 Welcome to the family!';
-        userCard.className = 'user-card member';
-        adminPanel.style.display = 'none';
-      }
-      
-      loginScreen.classList.add('hidden');
-      welcomeScreen.classList.add('visible');
-      
-      sessionStorage.setItem('currentUser', JSON.stringify(user));
-    }
-    
+
     function handleLogout() {
       currentUser = null;
       sessionStorage.removeItem('currentUser');
-      
-      document.getElementById('login-form').reset();
-      document.getElementById('error-message').classList.remove('visible');
-      
       document.getElementById('welcome-screen').classList.remove('visible');
       document.getElementById('login-screen').classList.remove('hidden');
+      document.getElementById('login-form').reset();
     }
-    
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      
-      event.target.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-      
-      if (tabId === 'users-tab') {
-        loadUsers();
+
+    async function showWelcomeScreen() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('welcome-screen').classList.add('visible');
+
+      // Update header
+      document.getElementById('user-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+      document.getElementById('user-avatar').className = 'avatar-mini ' + currentUser.role;
+      document.getElementById('user-name-display').textContent = currentUser.name;
+      document.getElementById('role-badge').textContent = currentUser.role === 'admin' ? 'Admin' : 'Member';
+      document.getElementById('role-badge').className = 'role-badge role-' + currentUser.role;
+
+      // Update title
+      document.getElementById('tasks-title').textContent = currentUser.role === 'admin' ? 'All Family Tasks' : 'My Tasks';
+
+      // Show admin panel
+      if (currentUser.role === 'admin') {
+        document.getElementById('admin-panel').style.display = 'block';
+        await loadUsers();
+        await loadAssigneeDropdown();
+      } else {
+        document.getElementById('admin-panel').style.display = 'none';
       }
+
+      await loadTasks();
     }
-    
-    async function loadUsers() {
-      const userList = document.getElementById('user-list');
-      
+
+    // Tasks
+    async function loadTasks() {
       try {
-        const response = await fetch('/api/users');
-        const users = await response.json();
-        
-        if (users.length === 0) {
-          userList.innerHTML = '<div class="empty-state">No one here yet!</div>';
-          return;
-        }
-        
-        userList.innerHTML = users.map(user => `
-          <div class="user-list-item">
-            <div class="user-list-info">
-              <div class="user-list-avatar avatar ${user.role}">
-                ${user.name.charAt(0).toUpperCase()}
-              </div>
-              <div class="user-list-details">
-                <div class="user-list-name">${user.name} <span class="role-badge role-${user.role}">${user.role === 'admin' ? 'Admin' : 'Member'}</span></div>
-                <div class="user-list-username">@${user.username}</div>
-              </div>
-            </div>
-            <button class="delete-btn" onclick="handleDeleteUser('${user.username}')" 
-              ${user.username === currentUser?.username ? 'disabled title="That\'s you!"' : ''}>
-              Remove
-            </button>
-          </div>
-        `).join('');
-      } catch (error) {
-        userList.innerHTML = '<div class="empty-state">Oops! Could not load users.</div>';
-      }
-    }
-    
-    async function handleAddUser(event) {
-      event.preventDefault();
-      
-      const name = document.getElementById('new-name').value.trim();
-      const username = document.getElementById('new-username').value.trim();
-      const password = document.getElementById('new-password').value;
-      const role = document.getElementById('new-role').value;
-      const addBtn = document.getElementById('add-user-btn');
-      const message = document.getElementById('add-message');
-      
-      addBtn.disabled = true;
-      addBtn.textContent = 'Adding...';
-      message.classList.remove('visible', 'success', 'error');
-      
-      try {
-        const response = await fetch('/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Admin-User': currentUser.username
-          },
-          body: JSON.stringify({ name, username, password, role })
+        const res = await fetch('/api/tasks', {
+          headers: { 'X-User': currentUser.username }
         });
-        
-        const data = await response.json();
-        
+        allTasks = await res.json();
+        renderTasks();
+        updateStats();
+      } catch (err) {
+        console.error('Error loading tasks:', err);
+      }
+    }
+
+    function renderTasks() {
+      const taskList = document.getElementById('task-list');
+      let filtered = allTasks;
+
+      if (currentFilter === 'pending') {
+        filtered = allTasks.filter(t => t.status === 'pending');
+      } else if (currentFilter === 'completed') {
+        filtered = allTasks.filter(t => t.status === 'completed');
+      }
+
+      if (filtered.length === 0) {
+        taskList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-emoji">${currentFilter === 'completed' ? '🎉' : '✨'}</div>
+            <p>${currentFilter === 'completed' ? 'No completed tasks yet!' : 'No tasks to do! Enjoy your free time!'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      taskList.innerHTML = filtered.map(task => `
+        <div class="task-item ${task.status === 'completed' ? 'completed' : ''}">
+          <div class="task-checkbox ${task.status === 'completed' ? 'checked' : ''}" onclick="toggleTask(${task.id})">
+            ${task.status === 'completed' ? '✓' : ''}
+          </div>
+          <div class="task-content">
+            <div class="task-title">${escapeHtml(task.title)}</div>
+            ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ''}
+            <div class="task-meta">
+              <span class="task-priority priority-${task.priority}">${task.priority}</span>
+              ${currentUser.role === 'admin' ? `<span class="task-assignee">👤 ${escapeHtml(task.assignedToName)}</span>` : ''}
+            </div>
+          </div>
+          ${currentUser.role === 'admin' ? `<button class="task-delete" onclick="deleteTask(${task.id})">🗑️</button>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function filterTasks(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('#task-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderTasks();
+    }
+
+    function updateStats() {
+      const pending = allTasks.filter(t => t.status === 'pending').length;
+      const completed = allTasks.filter(t => t.status === 'completed').length;
+      document.getElementById('stat-pending').textContent = pending;
+      document.getElementById('stat-completed').textContent = completed;
+    }
+
+    async function toggleTask(id) {
+      const task = allTasks.find(t => t.id === id);
+      if (!task) return;
+
+      const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+
+      try {
+        await fetch(`/api/tasks/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', 'X-User': currentUser.username },
+          body: JSON.stringify({ status: newStatus })
+        });
+        task.status = newStatus;
+        renderTasks();
+        updateStats();
+      } catch (err) {
+        console.error('Error updating task:', err);
+      }
+    }
+
+    async function deleteTask(id) {
+      if (!confirm('Delete this task?')) return;
+
+      try {
+        await fetch(`/api/tasks/${id}`, {
+          method: 'DELETE',
+          headers: { 'X-Admin-User': currentUser.username }
+        });
+        allTasks = allTasks.filter(t => t.id !== id);
+        renderTasks();
+        updateStats();
+      } catch (err) {
+        console.error('Error deleting task:', err);
+      }
+    }
+
+    async function handleAddTask(event) {
+      event.preventDefault();
+      const title = document.getElementById('task-title').value.trim();
+      const description = document.getElementById('task-description').value.trim();
+      const assignedTo = document.getElementById('task-assignee').value;
+      const priority = document.getElementById('task-priority').value;
+      const message = document.getElementById('task-message');
+      const btn = document.getElementById('add-task-btn');
+
+      btn.disabled = true;
+      message.classList.remove('visible', 'success', 'error');
+
+      try {
+        const res = await fetch('/api/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-User': currentUser.username },
+          body: JSON.stringify({ title, description, assignedTo, priority })
+        });
+        const data = await res.json();
+
         if (data.success) {
           message.textContent = '✅ ' + data.message;
           message.classList.add('visible', 'success');
-          
-          document.getElementById('new-name').value = '';
-          document.getElementById('new-username').value = '';
-          document.getElementById('new-password').value = '12345678';
-          document.getElementById('new-role').value = 'member';
-          
-          loadUsers();
+          document.getElementById('task-title').value = '';
+          document.getElementById('task-description').value = '';
+          await loadTasks();
         } else {
           message.textContent = '❌ ' + data.message;
           message.classList.add('visible', 'error');
         }
-      } catch (error) {
-        message.textContent = '❌ Something went wrong. Try again!';
+      } catch (err) {
+        message.textContent = '❌ Something went wrong';
         message.classList.add('visible', 'error');
       } finally {
-        addBtn.disabled = false;
-        addBtn.textContent = 'Add Person';
+        btn.disabled = false;
       }
     }
-    
-    async function handleDeleteUser(username) {
-      if (!confirm(`Remove "${username}" from the family?`)) {
-        return;
-      }
-      
+
+    // Admin tabs
+    function switchAdminTab(tabId) {
+      document.querySelectorAll('#admin-panel .tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('#admin-panel .tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Users
+    async function loadUsers() {
       try {
-        const response = await fetch(`/api/users/${username}`, {
-          method: 'DELETE',
-          headers: {
-            'X-Admin-User': currentUser.username
-          }
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-          loadUsers();
-        } else {
-          alert(data.message);
-        }
-      } catch (error) {
-        alert('Something went wrong. Try again!');
+        const res = await fetch('/api/users');
+        const users = await res.json();
+
+        document.getElementById('user-list').innerHTML = users.map(user => `
+          <div class="user-list-item">
+            <div class="user-list-info">
+              <div class="user-list-avatar avatar-mini ${user.role}">${user.name.charAt(0).toUpperCase()}</div>
+              <div>
+                <div class="user-list-name">${escapeHtml(user.name)} <span class="role-badge role-${user.role}">${user.role}</span></div>
+                <div class="user-list-username">@${user.username}</div>
+              </div>
+            </div>
+            <button class="delete-btn" onclick="deleteUser('${user.username}')" ${user.username === currentUser.username ? 'disabled' : ''}>Remove</button>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error('Error loading users:', err);
       }
     }
-    
+
+    async function loadAssigneeDropdown() {
+      try {
+        const res = await fetch('/api/users');
+        const users = await res.json();
+        document.getElementById('task-assignee').innerHTML = users.map(u => 
+          `<option value="${u.username}">${u.name}</option>`
+        ).join('');
+      } catch (err) {
+        console.error('Error loading assignees:', err);
+      }
+    }
+
+    async function handleAddUser(event) {
+      event.preventDefault();
+      const name = document.getElementById('new-name').value.trim();
+      const username = document.getElementById('new-username').value.trim();
+      const password = document.getElementById('new-password').value;
+      const role = document.getElementById('new-role').value;
+      const message = document.getElementById('add-user-message');
+
+      try {
+        const res = await fetch('/api/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-User': currentUser.username },
+          body: JSON.stringify({ name, username, password, role })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          message.textContent = '✅ ' + data.message;
+          message.classList.add('visible', 'success');
+          document.getElementById('new-name').value = '';
+          document.getElementById('new-username').value = '';
+          await loadUsers();
+          await loadAssigneeDropdown();
+        } else {
+          message.textContent = '❌ ' + data.message;
+          message.classList.add('visible', 'error');
+        }
+      } catch (err) {
+        message.textContent = '❌ Something went wrong';
+        message.classList.add('visible', 'error');
+      }
+    }
+
+    async function deleteUser(username) {
+      if (!confirm(`Remove ${username} from the family?`)) return;
+
+      try {
+        await fetch(`/api/users/${username}`, {
+          method: 'DELETE',
+          headers: { 'X-Admin-User': currentUser.username }
+        });
+        await loadUsers();
+        await loadAssigneeDropdown();
+        await loadTasks();
+      } catch (err) {
+        console.error('Error deleting user:', err);
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Init
     window.addEventListener('DOMContentLoaded', () => {
-      const savedUser = sessionStorage.getItem('currentUser');
-      if (savedUser) {
+      const saved = sessionStorage.getItem('currentUser');
+      if (saved) {
         try {
-          const user = JSON.parse(savedUser);
-          showWelcomeScreen(user);
+          currentUser = JSON.parse(saved);
+          showWelcomeScreen();
         } catch (e) {
           sessionStorage.removeItem('currentUser');
         }
