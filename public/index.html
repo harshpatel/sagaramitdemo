@@ -798,6 +798,7 @@
           headers: { 'Content-Type': 'application/json', 'X-Admin-User': currentUser.username },
           body: JSON.stringify({ title, description, assignedTo, priority })
         });
+        
         const data = await res.json();
 
         if (data.success) {
@@ -807,11 +808,14 @@
           document.getElementById('task-description').value = '';
           await loadTasks();
         } else {
-          message.textContent = '❌ ' + data.message;
+          message.textContent = '❌ ' + (data.message || 'Failed to create task');
           message.classList.add('visible', 'error');
+          // Refresh the assignee list in case users changed
+          await loadAssigneeDropdown();
         }
       } catch (err) {
-        message.textContent = '❌ Something went wrong';
+        console.error('Add task error:', err);
+        message.textContent = '❌ Connection error - please try again';
         message.classList.add('visible', 'error');
       } finally {
         btn.disabled = false;
